@@ -1,0 +1,46 @@
+﻿@using SpiceStore.Models
+@model IEnumerable<MenuItem>
+@*@if (Model.Categories.Count() > 0)
+    {
+        <div class="align-content-center" style="padding-top:2em; align-items:center;">
+            <button class="btn btn-info">Show All</button>
+            @foreach (var catButn in Model.Categories)
+            {
+                if (true)
+                {
+                    <button class="btn btn-info active">@catButn.CategoryName</button>
+                }
+                else
+                {
+                    <button class="btn btn-info">@catButn.CategoryName</button>
+                }
+            }
+        </div>
+    }*@
+@{
+    int write = 0;
+    System.Globalization.RegionInfo objRegInfo = new System.Globalization.RegionInfo("en-IN");
+    string syb = objRegInfo.CurrencySymbol;
+}
+@foreach (var menu in Model)
+{
+    
+    <div class="border border-info" style="padding-bottom:1em; padding-left:1em; padding-right:1em; padding-top:1em;">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="@menu.MenuImgUrl" width="150px" height="150px" />
+            </div>
+            <div class="col">
+                <div class="row">
+                    <h4 style="color:cornflowerblue" class="col-md-4">@menu.Name</h4>
+                    <h3 class="col text-right" style="color:maroon">@syb@menu.Price</h3>
+                </div>
+
+                @*<h6><span style="background-color:darkturquoise" class="small">@menu.SubCategoryCode.Subcategory</span></h6>*@
+                <p>@menu.Description</p>
+                <a class="btn btn-success align-content-between" style="float: right" asp-route-Id="@menu.MenuKey" asp-action="MenuDetails" asp-controller="Shopping">Details</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}

@@ -1,0 +1,85 @@
+﻿@model SpiceStore.Models.RegisterModel
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> rolemanager
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1 style="color:blue">Create a New User</h1>
+
+<hr />
+
+<div class="row bg-white">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data" asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
+            <div class="form-group row">
+                <label asp-for="Name" class="control-label col-md-5"></label>
+                <input asp-for="Name" class="form-control col-md-7" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Email" class="control-label col-md-5"></label>
+                <input asp-for="Email" class="form-control col-md-7" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="StreetAddress" class="control-label col-md-5"></label>
+                <input asp-for="StreetAddress" class="form-control col-md-7" />
+                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="City" class="control-label col-md-5"></label>
+                <input asp-for="City" class="form-control col-md-7" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="State" class="control-label col-md-5"></label>
+                <input asp-for="State" class="form-control col-md-7" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="PostalCode" class="control-label col-md-5"></label>
+                <input asp-for="PostalCode" class="form-control col-md-7" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Phone" class="control-label col-md-5"></label>
+                <input asp-for="Phone" class="form-control col-md-7" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Password" class="control-label col-md-5"></label>
+                <input asp-for="Password" class="form-control col-md-7" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ConfirmPassword" class="control-label col-md-5"></label>
+                <input asp-for="ConfirmPassword" class="form-control col-md-7" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            @if (User.IsInRole("Manager"))
+            {
+                <div class="form-group row">
+                    <label class="col-md-5">Role</label>
+                    @foreach (var role in rolemanager.Roles)
+                    {
+                        <input type="radio" name="roleName" value="@role.Name" />@role.Name <br />
+                    }
+                </div>
+            }
+
+            <div class="form-group row offset-6">
+                <input type="submit" value="Create New Employee" class="btn btn-primary col-md-4" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

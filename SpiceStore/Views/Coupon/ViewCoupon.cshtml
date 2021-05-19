@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Coupon>
+@{
+    ViewData["Title"] = "ViewCoupon";
+}
+
+<div class="bg-white card align-content-center">
+    <br />
+    <div class="container-fluid row ">
+        <h1 class="col" style="color:dodgerblue">Category List</h1>
+        <a class="btn btn-primary" asp-action="CreateCoupon" asp-controller="Coupon">Create New</a>
+    </div>
+
+
+    <br />
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Discount
+                </th>
+                <th>
+                    MinimumAmount
+                </th>
+                <th>
+                    IsActive
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var coupon in Model)
+                {
+                    <tr>
+                        <td>
+                            @coupon.Name
+                        </td>
+                        <td>
+                            @coupon.Discount
+                        </td>
+                        <td>
+                            @coupon.MinAmnt
+                        </td>
+                        <td>
+                            <input type ="checkbox" value="@coupon.isActive" checked="@coupon.isActive"/>
+                         
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="row">
+                            <a class="btn btn-primary" asp-action="updateCoupon" asp-controller="Coupon" asp-route-id="@coupon.CouponKey">Edit</a>
+                            <a class="btn btn-danger" asp-action="deleteCoupon" asp-controller="Coupon" asp-route-id="@coupon.CouponKey">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

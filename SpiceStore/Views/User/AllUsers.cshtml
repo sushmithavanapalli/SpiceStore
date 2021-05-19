@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "AllUsers";
+}
+
+<div class="bg-white card align-content-center">
+    <br />
+    <div class="container-fluid row ">
+        <h1 class="col" style="color:dodgerblue">Useres List</h1>
+        <a class="btn btn-primary" asp-action="Register" asp-controller="Account">Create New</a>
+    </div>
+
+
+    <br />
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    User Name
+                </th>
+                <th> Email </th>
+            </tr>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @user.Name
+                        </td>
+                        <td>@user.UserName</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="row">
+                            <a class="btn btn-primary" asp-action="LockUser" asp-controller="User" asp-route-id="@user.Id">Lock</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,96 @@
+﻿@model SubCategory
+@{
+    ViewData["Title"] = "CreateSubCat";
+}
+
+<h1 style="color:dodgerblue">Create SubCategory</h1>
+<br />
+<div asp-validation-summary="ModelOnly"></div>
+@if (ViewBag.Alert != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @ViewBag.Alert
+    </div>
+}
+<form method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-primary" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label>Category</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select id="ddlCategorylist" asp-for="CategoryKey" asp-items="ViewBag.CategoryKey" class="form-control"></select>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4" asp-for="Subcategory"></label> &nbsp; &nbsp;
+                        <input asp-for="Subcategory" class="form-control col-md-6" />
+                        <span asp-validation-for="Subcategory" class="text-danger"></span>
+                    </div>
+
+                    <div class="row form-group offset-4">
+                        <button class="btn bg-success form-control col-md-4" asp-action="CreateSubCat" asp-controller="SubCategory">Create</button>&nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-primary form-control col-md-4" asp-action="SubCatList" asp-controller="SubCategory">Back to List</button>
+                    </div>
+                </div>
+                
+                    <div class="vertical row" style="border-left: 1px solid black;height: 150px;"></div>
+                &nbsp;
+                <div class="col">
+                    @if (ViewData["subCategories"] != null)
+                    {
+                        
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                SubCategory
+                            </th>
+                        </tr>
+                        @foreach (var subCat in ViewData["subCategories"] as IList<SubCategory>)
+                        {
+                            <tr>
+                                <td>
+                                    @{
+                                        var CatName = string.Empty;
+                                        foreach (var Cat in ViewData["Categories"] as IList<Category>)
+                                        {
+                                            if (Cat.CategoryKey == subCat.CategoryKey)
+                                            {
+                                                CatName = Cat.CategoryName;
+                                            }
+                                        }
+                                    }
+
+                                    @CatName
+                                </td>
+                                <td>
+                                    @subCat.Subcategory
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                    }
+
+                </div>
+            </div>
+                        
+        </div>
+
+    </div>
+</form>

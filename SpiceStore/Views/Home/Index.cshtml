@@ -1,0 +1,31 @@
+﻿@using SpiceStore.Models.ViewModels
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container bg-white">
+
+    @if (Model.Categories.Count() > 0)
+    {
+        <div class="align-content-center" style="padding-top:2em; align-items:center;">
+            <button class="btn btn-info active">Show All</button>
+            @foreach (var catButn in Model.Categories)
+            {
+                <a asp-action="GetView" asp-controller="Home" asp-route-id="@catButn.CategoryKey" class="btn btn-info" id="catbtn">@catButn.CategoryName</a>
+            }
+        </div>
+        <br />
+        <div id="showAll">
+            @foreach (var category in Model.Categories)
+            {
+                <partial name="_MenuItemPartial" model="@Model.MenuItems.Where(m => m.CategoryKey == category.CategoryKey)" />
+            }
+        </div>
+
+        //foreach (var menu in Model.MenuItems)
+        //{
+
+        //}
+    }
+</div>

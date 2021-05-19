@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SubCategory>
+@using SpiceStore.Data;
+@{
+    ViewData["Title"] = "SubCatList";
+   
+}
+
+<div class="bg-white card align-content-center">
+    <br />
+    <div class="container-fluid row ">
+        <h1 class="col" style="color:dodgerblue">Sub Category List</h1>
+        <a class="btn btn-primary" asp-action="CreateSubCat" asp-controller="SubCategory">Create New</a>
+    </div>
+
+
+    <br />
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Sub Category Name
+                </th>
+                <th>
+                    Category Name
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var subcategory in Model)
+                {
+                    <tr>
+                        <td>
+                            @subcategory.Subcategory
+                        </td>
+                        <td>
+                            @{
+                                var CatName = string.Empty;
+                                foreach (var Cat in ViewData["Categories"] as IList<Category>)
+                                {
+                                    if (Cat.CategoryKey == subcategory.CategoryKey)
+                                    {
+                                        CatName = Cat.CategoryName;
+                                    }
+                                }
+                            }
+
+                            @CatName
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="row">
+                            <a class="btn btn-primary" asp-action="UpdateSubCat" asp-controller="SubCategory" asp-route-id="@subcategory.SubCategoryKey">Edit</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="SubCategory" asp-route-id="@subcategory.SubCategoryKey">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

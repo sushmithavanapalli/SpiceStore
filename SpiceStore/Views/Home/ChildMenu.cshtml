@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "ChildMenu";
+
+    System.Globalization.RegionInfo objRegInfo = new System.Globalization.RegionInfo("en-IN");
+    string syb = objRegInfo.CurrencySymbol;
+}
+
+<div class="align-content-center container bg-white" style="padding-top:2em; align-items:center;">
+    
+    <div style="align-content:center">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-info">Show All</a>
+        @foreach (var catButn in ViewData["Categories"] as IList<Category>)
+        {
+            if (catButn.CategoryName == ViewBag.CatName)
+            {
+                <a asp-action="GetView" asp-controller="Home" asp-route-id="@catButn.CategoryKey" class="btn btn-info active" id="catbtn">@catButn.CategoryName</a>
+            }
+            else
+            {
+                <a asp-action="GetView" asp-controller="Home" asp-route-id="@catButn.CategoryKey" class="btn btn-info" id="catbtn">@catButn.CategoryName</a>
+            }
+
+        }
+    </div>
+        <br/>
+        <div class="container">
+            <h3 style="color:forestgreen">@ViewBag.CatName</h3> 
+        </div>
+
+        @foreach (var menu in Model)
+        {
+            <div class="border border-info" style="padding-bottom:1em; padding-left:1em; padding-right:1em; padding-top:1em;">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="@menu.MenuImgUrl" width="150px" height="150px" />
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <h4 style="color:cornflowerblue" class="col-md-4">@menu.Name</h4>
+                            @if (menu.spicy == spicy.NotSpicy)
+                            {
+                                <img src="~/Images/noSpicy.jpg" width="20px" height="30px" />
+                            }
+                            else if (menu.spicy == spicy.Spicy)
+                            {
+                                <img src="~/Images/spicy.jpg" width="20px" height="30px" />
+                            }
+                            else if (menu.spicy == spicy.VerySpicy)
+                            {
+                                <img src="~/Images/Verspicy.jpg" width="20px" height="30px" />
+
+                            }
+                            <h3 class="col text-right" style="color:maroon">@syb@menu.Price</h3>
+                        </div>
+                        
+                        <h6><span style="background-color:darkturquoise" class="small">@ViewBag.SubCat</span></h6>
+                        <p>@menu.Description</p>
+                        <button class="btn btn-success align-content-between" style="float: right">Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+        }
+    
+</div>

@@ -1,0 +1,26 @@
+﻿@model string
+
+<h1 style="color:blue">Create Role</h1>
+<br />
+<div class="bg-white">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <br />
+    <form asp-action="NewRole" method="post">
+        @if (ViewBag.Message != string.Empty)
+        {
+            <div class="alert alert-primary" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+        <br />
+        <div class="form-group row offset-1">
+            <label for="name" class="col-md-4">Name:</label>
+            <input name="name" class="form-control col-md-4" />
+        </div>
+        <div class="row form-group offset-4">
+            <button type="submit" class="btn btn-success col-md-3">Create</button>&nbsp;&nbsp;
+            <a class="btn btn-primary form-control col-md-3" asp-action="Privacy" asp-controller="Home">Back to List</a>
+        </div>
+
+    </form>
+</div>

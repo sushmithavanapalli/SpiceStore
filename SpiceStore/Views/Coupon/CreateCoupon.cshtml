@@ -1,0 +1,55 @@
+﻿@model Coupon
+@{
+    ViewData["Title"] = "CreateCoupon";
+}
+
+<h1 style="color:blue">Create Coupon</h1>
+<br />
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-primary" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+            <br />
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="Name"></label> &nbsp; &nbsp;
+                <input asp-for="Name" class="form-control col-md-4" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="coupontype"></label> &nbsp; &nbsp;
+                <select asp-for="coupontype" asp-items="Html.GetEnumSelectList<couponType>()" class="form-control col-md-4"></select>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="Discount"></label> &nbsp; &nbsp;
+                <input asp-for="Discount" class="form-control col-md-4" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="MinAmnt"></label> &nbsp; &nbsp;
+                <input asp-for="MinAmnt" class="form-control col-md-4" />
+                <span asp-validation-for="MinAmnt" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="isActive"></label> &nbsp; &nbsp;
+                <input type="checkbox" asp-for="isActive" class="form-control col-md-4" />
+                <span asp-validation-for="isActive" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group offset-4">
+                <button class="btn bg-success form-control col-md-3" asp-action="CreateCoupon" asp-controller="Coupon">Create</button>&nbsp; &nbsp; &nbsp;
+                <button class="btn btn-primary form-control col-md-3" asp-action="ViewCoupon" asp-controller="Coupon">Back to List</button>
+            </div>
+        </div>
+    </div>
+</form>

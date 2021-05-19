@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "CategoryList";
+}
+
+<div class="bg-white card align-content-center">
+    <br />
+    <div class="container-fluid row ">
+        <h1 class="col" style="color:dodgerblue">Category List</h1>
+        <a class="btn btn-primary" asp-action="Create" asp-controller="Category">Create New</a>
+    </div>
+    
+
+    <br />
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Category Name
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>
+                            @category.CategoryName
+                        </td>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        <td class="row">
+                            <a class="btn btn-primary" asp-action="Update" asp-controller="Category" asp-route-id="@category.CategoryKey">Edit</a>                          
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="Category" asp-route-id="@category.CategoryKey">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

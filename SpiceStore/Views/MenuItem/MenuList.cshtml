@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MenuItem>
+@{
+    ViewData["Title"] = "MenuList";
+}
+
+<div class="bg-white card align-content-center">
+    <br />
+    <div class="container-fluid row ">
+        <h1 class="col" style="color:dodgerblue">Menu Item List</h1>
+        <a class="btn btn-primary" asp-action="CreateMenu" asp-controller="MenuItem">Create New</a>
+    </div>
+
+
+    <br />
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Sub-Category</th>
+            </tr>
+            <tbody>
+                @foreach (var menuItem in Model)
+                {
+                    <tr>
+                        <td>
+                            @menuItem.Name
+                        </td>
+                        <td>
+                            @menuItem.Price
+                        </td>
+                        <td>
+                            @{
+                                var CatName = string.Empty;
+                                foreach (var Cat in ViewData["MenuCategories"] as IList<Category>)
+                                {
+                                    if (Cat.CategoryKey == menuItem.CategoryKey)
+                                    {
+                                        CatName = Cat.CategoryName;
+                                    }
+                                }
+                            }
+
+                            @CatName
+                        </td>
+                        <td>
+                            @{ 
+                                var SubCatName = string.Empty;
+                                foreach (var SubCat in ViewData["MenuSubCategories"] as IList<SubCategory>)
+                                {
+                                    if (SubCat.SubCategoryKey == menuItem.SubCategoryKey)
+                                    {
+                                        SubCatName = SubCat.Subcategory;
+                                    }
+                                }
+                            }
+                            @SubCatName
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="row">
+                            <a class="btn btn-primary" asp-action="UpdateMenu" asp-controller="MenuItem" asp-route-id="@menuItem.MenuKey">Edit</a>
+                            <a class="btn btn-danger" asp-action="DeleteMenu" asp-controller="MenuItem" asp-route-id="@menuItem.MenuKey">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

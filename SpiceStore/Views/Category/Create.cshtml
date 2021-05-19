@@ -1,0 +1,31 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 style="color:blue">Create Category</h1>
+<br/>
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-body">
+            @if (ViewBag.Message != string.Empty)
+            {
+                <div class="alert alert-primary" role="alert">
+                    @ViewBag.Message
+                </div>
+            }
+            <br />
+            <div class="form-group row">
+                <label class="col-md-4" asp-for="CategoryName"></label> &nbsp; &nbsp;
+                <input asp-for="CategoryName" class="form-control col-md-4" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="row form-group offset-4">
+                <button class="btn bg-success form-control col-md-3" asp-action="Create" asp-controller="Category">Create</button>&nbsp; &nbsp; &nbsp;
+                <button class="btn btn-primary form-control col-md-3" asp-action="CategoryList" asp-controller="Category">Back to List</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <ul class="navbar-nav flex-grow-1 row">
+            <li class="nav-item col">
+                <text class="nav-link text-light align-content-end">@UserManager.Users.Where(u => u.Email == User.Identity.Name).Select(a => a.Name).FirstOrDefault()</text>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link text-light align-content-end" asp-controller="Account" asp-action="Logout">Logout</a>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="navbar-nav flex-grow-1 row">
+            <li class="nav-item col">
+                <a class="nav-link text-light align-content-end" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link text-light align-content-end" asp-controller="Account" asp-route-returnUrl="@Context.Request.Path" asp-action="Login">Login</a>
+            </li>
+        </ul>
+    }
+</div>
